@@ -1,0 +1,33 @@
+% Define a predicate to check if a character is a vowel
+is_vowel(Char) :-
+    char_code(Char, Code),
+    (   Code == 97 ;  % 'a'
+        Code == 101 ;  % 'e'
+        Code == 105 ;  % 'i'
+        Code == 111 ;  % 'o'
+        Code == 117 ;  % 'u'
+        Code == 65 ;  % 'A'
+        Code == 69 ;  % 'E'
+        Code == 73 ;  % 'I'
+        Code == 79 ;  % 'O'
+        Code == 85  % 'U'
+    ).
+
+% Define a predicate to count vowels in a string
+count_vowels(String, Count) :-
+    atom_chars(String, Chars),
+    count_vowels(Chars, 0, Count).
+
+% Helper predicate to recursively count vowels
+count_vowels([], Count, Count).
+count_vowels([Char|Chars], Acc, Count) :-
+    (   is_vowel(Char) ->
+        Acc1 is Acc + 1
+    ;   Acc1 = Acc
+    ),
+    count_vowels(Chars, Acc1, Count).
+
+% Test the predicate
+test :-
+    count_vowels('Hello World', Count),
+    writeln(Count).
