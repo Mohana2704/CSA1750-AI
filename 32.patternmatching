@@ -1,0 +1,27 @@
+% Define a predicate to match patterns
+match_pattern(Pattern, Data) :-
+    % Match Pattern with Data
+    Pattern = Data.
+
+
+% Test the predicate
+test :-
+    % Match a simple term
+    match_pattern(a, a),
+    writeln('Simple term matched'),
+    
+    % Match a compound term
+    match_pattern(person(john, 30), person(john, 30)),
+    writeln('Compound term matched'),
+    
+    % Match a list
+    match_pattern([1, 2, 3], [1, 2, 3]),
+    writeln('List matched'),
+    
+    % Fail to match
+    \+ match_pattern(a, b),
+    writeln('Non-matching pattern failed').
+
+
+% Run the test
+:- test.
